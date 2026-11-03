@@ -16,11 +16,15 @@ has been told nothing about the game**.
 
 1. **Fix the entry point**: the launch arguments (a fresh save, if the game has such a flag) and the viewport size from
    `project.godot`. Check that `godot-kit shot` works in the game.
+   **Give the agent a clean copy.** The folder name, `CLAUDE.md`, `README.md` and `docs/` all tell it what the game is.
+   Copy the project somewhere with a neutral name (`/tmp/playtest/g1`) without those files, and point the brief there.
 2. **Spawn exactly one subagent** (a small, cheap model is enough). Give it only the brief below. Do not give it the
    game's name, genre, rules, README or source, and tell it not to read them.
 3. **Compare its report with what you intended.** Candidates to fix: things it never noticed were pressable, things it
    misread, places it stopped.
 4. After fixing, run it again with **a new subagent**. The previous one is no longer a first-time player.
+5. **Keep every round.** Save the report as `docs/playtests/NN.md` with the date and what you changed afterwards, so you
+   can see whether round 2 lost fewer places than round 1. `examples/sleepy-cat/playtests/` has two real rounds.
 
 ## Brief (use as is; fill in the `<...>` parts and delete the input line that does not apply)
 
@@ -52,6 +56,10 @@ Report (facts only; no praise, no suggestions):
 ```
 
 ## What to look at in the report
+
+- **Byte-identical screenshots mean the agent saw nothing.** Run `cmp before.png after.png`. If the agent says "nothing
+  reacted" but the game did change state (a counter went down, a timer reset), the finding is that the change was
+  invisible. That is a feedback bug, not an agent mistake. Confirm by replaying the same input yourself and comparing.
 
 - Did it hesitate before the first action? Then pressable things do not look pressable before interaction.
 - Could it state the goal and the rules? If not, the game is missing a place that teaches them in words.
