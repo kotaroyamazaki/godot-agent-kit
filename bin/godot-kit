@@ -1,0 +1,44 @@
+#!/bin/bash
+# godot-kit: one entry point for the scripts. Run `godot-kit help`.
+SELF=$0
+while [ -L "$SELF" ]; do
+	T=$(readlink "$SELF"); case "$T" in /*) SELF=$T ;; *) SELF=$(dirname "$SELF")/$T ;; esac
+done
+KIT=$(cd "$(dirname "$SELF")/.." && pwd -P)
+S=$KIT/scripts
+CMD=${1:-help}; [ $# -gt 0 ] && shift
+case "$CMD" in
+	setup)   exec "$S/setup.sh" "$@" ;;
+	doctor)  exec "$S/doctor.sh" "$@" ;;
+	new)     exec "$S/new.sh" "$@" ;;
+	check)   exec "$S/check.sh" "$@" ;;
+	parse)   exec "$S/parse.sh" "$@" ;;
+	shot)    exec "$S/shot.sh" "$@" ;;
+	sheet)   exec python3 "$S/sheet.py" "$@" ;;
+	record)  exec "$S/record.sh" "$@" ;;
+	image)   exec python3 "$S/gen_image.py" "$@" ;;
+	regen-images) exec python3 "$S/regen_fallbacks.py" "$@" ;;
+	rules)   echo "$KIT/RULES.md" ;;
+	lib)     echo "$KIT/lib" ;;
+	root)    echo "$KIT" ;;
+	help|-h|--help) cat <<'USAGE'
+godot-kit <command> [args]      (run inside a Godot project unless noted)
+
+  setup                  create ~/.config/godot-kit/config.env interactively        (anywhere)
+  doctor                 show which features work and what is missing               (anywhere)
+  new <id> "<title>"     create a new game from the template                        (anywhere)
+
+  check                  run the game's tools/check.sh, or just the script-error check
+  parse                  script-error check only (import + 120 headless frames)
+  shot OUT.png [...]     open a window, take screenshots, optionally replay input
+  sheet a_1.png ... -o sheet.jpg     tile numbered screenshots into contact sheets
+  record [sec] [out.mp4] record gameplay to a small mp4
+
+  image OUT.png "prompt" generate an image (OpenAI; falls back to Gemini)
+  regen-images           regenerate images that were made by the fallback provider
+
+  rules | lib | root     print the path of RULES.md / lib / the install directory
+USAGE
+	;;
+	*) echo "error: unknown command: $CMD (try: godot-kit help)" >&2; exit 2 ;;
+esac

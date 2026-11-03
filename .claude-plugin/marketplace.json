@@ -1,0 +1,12 @@
+{
+  "name": "godot-agent-kit",
+  "description": "Tools for making Godot games with Claude Code",
+  "owner": { "name": "Kotaro Yamazaki" },
+  "plugins": [
+    {
+      "name": "godot-agent-kit",
+      "source": "./",
+      "description": "Let Claude see and touch a Godot game: screenshots, replayed input, blind playtests, image generation, a project template, and a short rulebook."
+    }
+  ]
+}

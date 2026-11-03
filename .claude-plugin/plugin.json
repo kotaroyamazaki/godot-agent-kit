@@ -1,0 +1,9 @@
+{
+  "name": "godot-agent-kit",
+  "displayName": "Godot Agent Kit",
+  "version": "0.1.0",
+  "description": "Let Claude see and touch a Godot game: screenshots, replayed input, blind playtests by a subagent, image generation, a project template, and a short rulebook.",
+  "author": { "name": "Kotaro Yamazaki" },
+  "license": "MIT",
+  "keywords": ["godot", "gamedev", "screenshots", "playtest", "gdscript"]
+}
