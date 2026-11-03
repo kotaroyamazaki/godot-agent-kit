@@ -35,6 +35,8 @@ Your job: look at the screen, press what looks pressable, and work out what this
 Tool (run it inside <absolute path of the game folder>):
   godot-kit shot <out>.png --after <sec> [--every 1 --count N] -- <launch args> <inputs...>
 - The screen is <width>x<height>. Input coordinates use that size; times are seconds since launch.
+- Saved images can be smaller than the screen (the window is scaled down). Convert image coordinates to input
+  coordinates by multiplying by <width> / <image width>.
 - Touch game:           --tap=x,y,sec   --hold=x,y,sec,length   --swipe=x1,y1,x2,y2,sec
 - Mouse/keyboard game:  --click=x,y,sec  --move=x,y,sec (hover)  --key=Name,sec  (Enter, Space, Escape, Left, Right, Up, Down, A...)
 - Every launch starts from the beginning. So each time, repeat ALL inputs you have made so far and add one new input
