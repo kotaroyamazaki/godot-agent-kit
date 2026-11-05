@@ -1,24 +1,32 @@
 # godot-agent-kit
 
-**Your AI agent writes Godot code but never plays the game. This lets it play, and lets a stranger play it for you.**
+**Your AI agent screenshots, taps and blind-playtests your Godot game.**
+A Claude Code plugin. Give the game to an AI that was told nothing, and it reports where a first-time player gets lost.
 
-![A blind subagent playtests a cat game, before and after the fixes](docs/demo/demo.gif)
+![An AI that was told nothing plays a cat game: "I could not tell." After the fixes, a new one gets the rules right.](docs/demo/demo.gif)
 
-*A subagent that was told nothing plays the game from screenshots and reports where it got lost. Then the fixes, and a new stranger. Real runs, real quotes. [Video](docs/demo/demo.mp4).*
+*Real runs of the [example game](examples/sleepy-cat). [Longer video with the agent's play-by-play](docs/demo/demo.mp4).*
 
 [日本語の README](README.ja.md)
 
-An agent can write GDScript all day and still hand you a screen nobody can use, because it never looks at the game or
-presses anything. godot-agent-kit gives it the missing loop:
+## Why
 
-- **See**: open the game in a real window, take screenshots or a contact sheet of numbered frames, and read them.
-- **Touch**: replay real input into the running game: taps, holds, swipes, mouse clicks, hover, keys.
-- **Ask a stranger**: a subagent that knows nothing about the game plays it from screenshots and reports where it got lost.
-- **Make art**: generate UI parts, characters and backgrounds with an image model, in one consistent style.
-- **Start clean**: a project template where all of the above works from the first minute.
-- **Rules**: about 80 lines of lessons that each cost a rework (game feel, tutorials, Godot pitfalls, git safety).
+Claude Code can write GDScript all day, but it never sees the game or presses anything. It says "done" and hands you a
+screen nobody can use. And even when it can look, it knows how the game works, so it cannot tell whether a new player
+would get it. Neither can you.
 
-It is deliberately small: six skills, one command, no role-play agents, no hooks, no process gates.
+## What it does
+
+1. **Screenshot**: `godot-kit shot out.png --after 3` launches the game and saves the screen 3 s in. The agent reads
+   the image and catches broken layout, overflowing text, blank screens.
+2. **Tap**: `--tap=360,800,2` (tap here at 2 s), plus holds, swipes, clicks, hover and keys, replayed into the running
+   game. The agent checks for itself that a button really works. `godot-kit record` makes a video.
+3. **Blind playtest** (the `playtest` skill), the main point: a fresh subagent that knows nothing about the game gets
+   only 1 and 2, plays, and reports what it pressed, what it expected, and where it got lost.
+
+Also included: a project template where all of this works from the first minute, a script-error check, image
+generation for UI parts in one style, and about 80 lines of rules that each cost a rework. It is deliberately small:
+six skills, one command, no role-play agents, no hooks, no process gates.
 
 ## What a blind playtest finds
 
