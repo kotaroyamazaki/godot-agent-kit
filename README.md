@@ -2,9 +2,9 @@
 
 **Your AI agent writes Godot code but never plays the game. This lets it play, and lets a stranger play it for you.**
 
-![Round 1 as first written against round 2 after one blind playtest](docs/demo/demo.gif)
+![A blind subagent playtests a cat game, before and after the fixes](docs/demo/demo.gif)
 
-*Same 30-second cat game, built twice. Left: as first written. Right: after one blind playtest. [Video](docs/demo/demo.mp4).*
+*A subagent that was told nothing plays the game from screenshots and reports where it got lost. Then the fixes, and a new stranger. Real runs, real quotes. [Video](docs/demo/demo.mp4).*
 
 [日本語の README](README.ja.md)
 
@@ -29,12 +29,12 @@ nothing about it played it from screenshots. The full reports are in
 | | Round 1 (as first written) | Round 2 (after the fixes) |
 |---|---|---|
 | Goal and rules | "I could not tell." | Stated correctly in its own words |
-| Pressable things found | "Nothing responds." | Both controls, at once |
-| Most lost | Right after pressing "fish", when nothing changed | "None. The card explained everything." |
+| Pressable things found | "Nothing confirmed pressable." | Both controls, at once |
+| Most lost | Right after tapping "fish": "I could not tell whether the tap missed" | "Never badly lost." Still found one: "how much margin I have when it is red" |
 
 The part worth noticing is round 1. The "fish" control **did work**: fed three times, the cat still has its eyes open
-at 15 s, unfed they are closed ([image](docs/demo/plain_fed_vs_unfed.png)). The agent saw an identical screen after every
-press and concluded nothing responded. The bug was that feeding changed a number nobody could see. The builder, who
+at 15 s, unfed they are closed ([image](docs/demo/plain_fed_vs_unfed.png)). The agent saw no change after any
+press and could not tell whether anything responded. The bug was that feeding changed a number nobody could see. The builder, who
 knows the answers, would never have noticed that.
 
 Try it on your own game: "Would a new player understand this?" loads the `playtest` skill.

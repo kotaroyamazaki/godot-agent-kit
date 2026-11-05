@@ -59,9 +59,10 @@ Report (facts only; no praise, no suggestions):
 
 ## What to look at in the report
 
-- **Byte-identical screenshots mean the agent saw nothing.** Run `cmp before.png after.png`. If the agent says "nothing
-  reacted" but the game did change state (a counter went down, a timer reset), the finding is that the change was
-  invisible. That is a feedback bug, not an agent mistake. Confirm by replaying the same input yourself and comparing.
+- **"Nothing reacted" is a finding, not an agent mistake.** If the agent says a press did nothing but the game did change
+  state (a counter went down, a timer reset), the change was invisible: a feedback bug. Confirm by replaying the same
+  input yourself and comparing with a run without it (`cmp a.png b.png` works when nothing on screen animates). Idle
+  motion makes it worse: the agent cannot tell a small reaction from the animation.
 
 - Did it hesitate before the first action? Then pressable things do not look pressable before interaction.
 - Could it state the goal and the rules? If not, the game is missing a place that teaches them in words.
